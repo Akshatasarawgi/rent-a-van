@@ -15,8 +15,8 @@ header {
     padding: 2% 4%;
 }
 main {
+    height: 100%;
     width: 100%;
-    height: 100vh;
     background-color: #FFF7ED;
 }
 footer {
@@ -153,29 +153,31 @@ header > nav > a:hover {
 }
 .vans-container > h1 {
     margin-bottom: 3%;
+    padding: 1% 2%;
 }
 .vans-list-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-
-    @media (max-width: 690px) {
-        grid-template-columns: 1fr;
-    }
+    grid-template-columns: repeat(auto-fit, minmax(380px, 2fr)); /* Learnt this today */
+    gap: 20px;
+}
+.filter-buttons-list {
+    padding: 1% 2%;
+}
+.filter-buttons-list > a {
+    text-decoration: none;
 }
 .van-tile {
     padding: 1% 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2% auto;
 }
 .van-tile > a {
     color: #161616;
     text-decoration: none;
 }
 .van-image {
-    width: 20rem;
+    width: 25rem;
     height: auto;
     border-radius: 5px;
     margin-bottom: 2%;
@@ -201,6 +203,7 @@ header > nav > a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 16px;
 }
 .simple {
     background-color: #E17654;
@@ -396,14 +399,8 @@ header > nav > a:hover {
     color: #161616;
     font-weight: 600;
 }
-.individual-van-info {
-    padding: 2% 3%;
-}
 .individual-van-info > p {
     margin: 2% auto;
-}
-.individual-van-price {
-    padding: 2% 3%;
 }
 .individual-van-price > p {
     font-size: 24px;
@@ -413,4 +410,63 @@ header > nav > a:hover {
 .individual-van-price > .price-per-day {
     font-size: 20px;
     color: #4D4D4D;
+}
+.individual-van-container {
+    padding: 2% 3%;
+}
+.filter-buttons-list {
+    display: flex;
+    margin-bottom: 5%;
+}
+.filter-buttons-list > .van-type {
+    background-color: #FFEAD0;
+    color: #4D4D4D;
+    padding: 2% 3%;
+    margin-right: 5%;
+}
+.filter-buttons-list > .clear {
+    color: #4D4D4D;
+}
+.filter-buttons-list > .van-type:hover {
+    color: #FFEAD0;
+}
+.filter-buttons-list > .van-type.simple:hover,.van-type.simple.selected {
+    background-color: #E17654;
+}
+.filter-buttons-list > .van-type.rugged:hover,.van-type.rugged.selected {
+    background-color: #115E59;
+}
+.filter-buttons-list > .van-type.luxury:hover, .van-type.luxury.selected{
+    background-color: #161616;
+}
+.filter-buttons-list > .van-type:focus {
+    outline: none;
+}
+.filter-buttons-list > .van-type.selected {
+    color: #FFEAD0;
+}
+.filter-buttons-list > button {
+    border: none;
+    background-color: inherit;
+}
+.notFound-container {
+    align-items: center;
+    padding: 10% 4%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.notFound-container > h1 {
+    font-size: 32px;
+    margin: 5% 0;
+}
+.notFound-container > a {
+    background-color: #161616;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 2% 4%;
+    border-radius: 10px;
+    font-size: 18px;
+    max-width: 500px;
+    text-decoration: none;
 }

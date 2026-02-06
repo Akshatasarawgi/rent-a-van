@@ -1,18 +1,40 @@
 import React from "react"
 import {Link} from "react-router-dom"
+import {getHostVans} from "../../../api"
 
 export default function HostVans() {
 
     const [vans, setVans] = React.useState([])
+    const [loading, setLoading] = React.useState(false)
+    const [error, setError] = React.useState(null)
 
     React.useEffect(() => {
-        fetch("/api/host/vans")
-        .then(response => response.json())
-        .then(data => setVans(data.vans))
+        async function loadHostVans() {
+            setLoading(true)
+            try {
+               const data = await getHostVans()
+               setVans(data)
+            }
+            catch(err) {
+                setError(err)
+            }
+            finally {
+                setLoading(false)
+            }
+        }
+        loadHostVans()
     }, [])
 
-  const vansToDisplay = vans.map(van => (
-    <Link to={`${van.id}`} key={van.id}>
+if(loading) {
+    return <h1>Loading ...</h1>
+  }
+
+  if(error) {
+    return <h1>There was an error : {error.message}</h1>
+  }
+ 
+ const vansToDisplay = vans.map(van => (
+    <Link to={van.id} key={van.id}>
     <div key={van.id} className="host-individual-van-tile">
         <img src={van.imageUrl} alt={`Image of ${van.name}`} />
         <div className="host-individual-van-tile-detail">
@@ -24,11 +46,18 @@ export default function HostVans() {
   ))
 
     return (
-        <section className="host-vans-container">
+       <section className="host-vans-container">
            <h1>Your listed vans</h1> 
            <div className="host-vans-list">
-               {vansToDisplay} 
+               {vans && vansToDisplay} 
            </div>
         </section>
     )
 }
+
+/*
+
+
+
+   
+*/
